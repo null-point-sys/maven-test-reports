@@ -1,1 +1,14 @@
-{ "steps": [], "status": "in_progress" }
+{
+  "steps": [
+    {
+      "step": "Compiling code",
+      "status": "in_progress"
+    },
+    {
+      "step": "Downloading artifact",
+      "status": "in_progress",
+      "message": "Downloading artifact ID: 2328803711 from repository null-point-sys/spring_boot_editor"
+    }
+  ],
+  "status": "in_progress"
+}
