@@ -26,6 +26,14 @@
       "step": "Downloading artifact",
       "status": "completed",
       "message": "Downloading artifact ID: 2328959488 from repository null-point-sys/spring_boot_editor"
+    },
+    {
+      "step": "Compiling code",
+      "status": "in_progress"
+    },
+    {
+      "step": "Downloading artifacts",
+      "status": "in_progress"
     }
   ],
   "status": "in_progress"
