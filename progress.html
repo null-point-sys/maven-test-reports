@@ -50,6 +50,10 @@
       document.getElementById('progressBar').style.width = `${percentage}%`;
       document.getElementById('progressBar').innerText = `${percentage}%`;
 
+      // Recargar la página automáticamente si el progreso está completo
+      if (progress.status === "completed") {
+        setTimeout(() => location.reload(), 3000); // Recargar después de 3 segundos
+      }
     } catch (err) {
       console.error("Error al cargar el progreso:", err);
       document.getElementById('progress').innerText = 'Error al cargar el progreso.';
@@ -60,7 +64,5 @@
   setInterval(fetchProgress, 5000);
   fetchProgress();
 </script>
-
 </body>
-
 </html>
