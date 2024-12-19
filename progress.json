@@ -1,1 +1,8 @@
-{ "steps": [{"step": "Compiling code", "status": "in_progress"}], "status": "in_progress" }
+{
+  "steps": [
+    {"step": "Compiling code", "status": "pending"},
+    {"step": "Downloading artifact", "status": "pending"},
+    {"step": "Running tests", "status": "pending"}
+  ],
+  "status": "in_progress"
+}
