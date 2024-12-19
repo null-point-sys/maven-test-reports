@@ -10,7 +10,7 @@
     },
     {
       "step": "Running tests",
-      "status": "pending"
+      "status": "complete"
     }
   ],
   "status": "in_progress"
