@@ -17,46 +17,53 @@
     font-weight: bold;
   }
 </style>
+  
 <body>
-<div id="progress">Cargando...</div>
-<div id="progressBarContainer">
-  <div id="progressBar">0%</div>
-</div>
+  <h1>Workflow Progress</h1>
+  <div id="progress">Cargando...</div>
+  <div id="progressBarContainer">
+    <div id="progressBar">0%</div>
+  </div>
 
-<script>
-  async function fetchProgress() {
-    try {
-      const response = await fetch('https://null-point-sys.github.io/maven-test-reports/progress.json');
-      if (!response.ok) {
-        throw new Error("Error al cargar el progreso.");
+  <script>
+    async function fetchProgress() {
+      try {
+        const response = await fetch('https://null-point-sys.github.io/maven-test-reports/progress.json');
+        if (!response.ok) {
+          throw new Error("Error al cargar el progreso.");
+        }
+        const progress = await response.json();
+
+        // Calcular porcentaje completado
+        const totalSteps = progress.steps.length;
+        const completedSteps = progress.steps.filter(step => step.status === 'completed').length;
+        const percentage = totalSteps > 0 ? Math.round((completedSteps / totalSteps) * 100) : 0;
+
+        // Mostrar los pasos y la barra de progreso
+        const stepsHtml = progress.steps.map(step => `
+          <li>
+            ${step.step}: 
+            <span style="color: ${step.status === 'completed' ? 'green' : step.status === 'in_progress' ? 'orange' : 'gray'};">
+              ${step.status}
+            </span>
+          </li>
+        `).join('');
+        document.getElementById('progress').innerHTML = `
+          <ul>${stepsHtml}</ul>
+          <p>Status general: <strong>${progress.status}</strong></p>
+        `;
+        document.getElementById('progressBar').style.width = `${percentage}%`;
+        document.getElementById('progressBar').innerText = `${percentage}%`;
+
+      } catch (err) {
+        document.getElementById('progress').innerText = 'Error al cargar el progreso.';
       }
-      const progress = await response.json();
-
-      // Calcular porcentaje completado
-      const totalSteps = progress.steps.length;
-      const completedSteps = progress.steps.filter(step => step.status === 'completed').length;
-      const percentage = totalSteps > 0 ? Math.round((completedSteps / totalSteps) * 100) : 0;
-
-      // Mostrar los pasos y la barra de progreso
-      const stepsHtml = progress.steps.map(step => `
-        <li>${step.step}: ${step.status}</li>
-      `).join('');
-      document.getElementById('progress').innerHTML = `
-        <ul>${stepsHtml}</ul>
-        <p>Status general: ${progress.status}</p>
-      `;
-      document.getElementById('progressBar').style.width = `${percentage}%`;
-      document.getElementById('progressBar').innerText = `${percentage}%`;
-
-    } catch (err) {
-      document.getElementById('progress').innerText = 'Error al cargar el progreso.';
     }
-  }
 
-  // Actualizar cada 5 segundos
-  setInterval(fetchProgress, 5000);
-  fetchProgress();
-</script>
-
+    // Actualizar cada 5 segundos
+    setInterval(fetchProgress, 5000);
+    fetchProgress();
+  </script>
 </body>
+
 </html>
