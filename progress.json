@@ -6,7 +6,7 @@
     },
     {
       "step": "Compiling code",
-      "status": "in_progress"
+      "status": "completed"
     },
     {
       "step": "Running tests",
