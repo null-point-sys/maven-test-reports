@@ -1,8 +1,17 @@
 {
   "steps": [
-    {"step": "Downloading artifact", "status": "pending"},
-    {"step": "Compiling code", "status": "pending"},
-    {"step": "Running tests", "status": "pending"}
+    {
+      "step": "Downloading artifact",
+      "status": "in_progress"
+    },
+    {
+      "step": "Compiling code",
+      "status": "pending"
+    },
+    {
+      "step": "Running tests",
+      "status": "pending"
+    }
   ],
   "status": "in_progress"
 }
