@@ -42,7 +42,7 @@
   <script>
     async function fetchProgress() {
       try {
-        // Fetch progress.json con un timestamp para evitar el caché
+        // Fetch progress.json con un timestamp para evitar caché
         const response = await fetch('https://null-point-sys.github.io/maven-test-reports/progress.json?timestamp=' + Date.now());
         if (!response.ok) {
           throw new Error("Error al cargar el progreso.");
@@ -59,22 +59,28 @@
           <li class="status-${step.status}">${step.step}: ${step.status}</li>
         `).join('');
 
-        // Actualizar DOM con los pasos y el estado general
-        document.getElementById('progress').innerHTML = `
-          <ul>${stepsHtml}</ul>
-          <p>Status general: ${progress.status}</p>
-        `;
-
         // Actualizar la barra de progreso
         const progressBar = document.getElementById('progressBar');
         progressBar.style.width = `${percentage}%`;
         progressBar.innerText = `${percentage}%`;
 
         // Cambiar el color de la barra según el progreso
-        if (percentage === 100) {
-          progressBar.style.backgroundColor = '#4caf50'; // Verde al completar
+        if (progress.status === "completed") {
+          progressBar.style.backgroundColor = '#4caf50'; // Verde al completarse
         } else {
           progressBar.style.backgroundColor = '#2196f3'; // Azul en progreso
+        }
+
+        // Actualizar DOM con los pasos y el estado general
+        document.getElementById('progress').innerHTML = `
+          <ul>${stepsHtml}</ul>
+          <p>Status general: ${progress.status}</p>
+        `;
+
+        // Si el workflow está completo, mostrar un mensaje final
+        if (progress.status === "completed") {
+          clearInterval(interval); // Detener actualizaciones
+          alert("Workflow completado exitosamente.");
         }
 
       } catch (err) {
@@ -84,7 +90,7 @@
     }
 
     // Llamar al fetch cada 5 segundos
-    setInterval(fetchProgress, 5000);
+    const interval = setInterval(fetchProgress, 5000);
     fetchProgress();
   </script>
 </body>
