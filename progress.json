@@ -6,7 +6,7 @@
     },
     {
       "step": "Compiling code",
-      "status": "pending"
+      "status": "in_progress"
     },
     {
       "step": "Running tests",
