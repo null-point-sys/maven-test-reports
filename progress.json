@@ -6,7 +6,7 @@
     },
     {
       "step": "Downloading artifact",
-      "status": "pending"
+      "status": "complete"
     },
     {
       "step": "Running tests",
