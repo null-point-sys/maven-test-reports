@@ -2,7 +2,7 @@
   "steps": [
     {
       "step": "Downloading artifact",
-      "status": "in_progress"
+      "status": "completed"
     },
     {
       "step": "Compiling code",
